@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const stockScheme = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     stock_name: {
       type: String,
       required: [true, "Stock name is required"],
