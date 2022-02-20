@@ -15,19 +15,19 @@ function Header() {
   };
   return (
     <header>
-      <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
         <Link
           to="/"
-          class="d-flex align-items-center text-dark text-decoration-none"
+          className="d-flex align-items-center text-dark text-decoration-none"
         >
-          <span class="fs-4">UrStocks</span>
+          <span className="fs-4">UrStocks</span>
         </Link>
 
-        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
           {user ? (
             <>
               <button
-                class="me-3 py-2 text-white text-decoration-none btn btn-dark"
+                className="me-3 py-2 text-white text-decoration-none btn btn-dark"
                 onClick={onLogout}
               >
                 <LogoutOutlined />
@@ -37,14 +37,14 @@ function Header() {
           ) : (
             <>
               <Link
-                class="me-3 py-2 text-dark text-decoration-none"
+                className="me-3 py-2 text-white text-decoration-none btn btn-dark"
                 to="/login"
               >
                 <LoginOutlined />
                 Login
               </Link>
               <Link
-                class="me-3 py-2 text-dark text-decoration-none"
+                className="me-3 py-2 text-white text-decoration-none btn btn-dark"
                 to="/register"
               >
                 <UserOutlined />

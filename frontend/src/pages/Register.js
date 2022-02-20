@@ -76,7 +76,11 @@ function Register() {
                   },
                 ]}
               >
-                <Input size="large" placeholder="Email" />
+                <Input
+                  size="large"
+                  placeholder="Email"
+                  autoComplete="username"
+                />
               </FormItem>
               <FormItem
                 name="password"
@@ -88,6 +92,7 @@ function Register() {
                   size="large"
                   prefix={<LockOutlined />}
                   placeholder="Password"
+                  autoComplete="new-password"
                 />
               </FormItem>
               <FormItem
@@ -100,6 +105,7 @@ function Register() {
                   size="large"
                   prefix={<LockOutlined />}
                   placeholder="Confirm Password"
+                  autoComplete="new-password"
                 />
               </FormItem>
               <FormItem>

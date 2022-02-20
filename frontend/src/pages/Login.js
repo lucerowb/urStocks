@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Form, Input, Button, Spin } from "antd";
 import { LoginOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -67,6 +67,7 @@ function Login() {
                   size="large"
                   prefix={<UserOutlined />}
                   placeholder="Email"
+                  autoComplete="username"
                 />
               </FormItem>
               <FormItem
@@ -79,6 +80,7 @@ function Login() {
                   size="large"
                   prefix={<LockOutlined />}
                   placeholder="Password"
+                  autoComplete="current-password"
                 />
               </FormItem>
               <FormItem>

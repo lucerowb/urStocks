@@ -40,15 +40,15 @@ const getStockById = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Stock not found");
   }
-  const user = await User.findById(req.user.id);
+
   // check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // check for logged in user matches the stock user
-  if (stock.user.toString() !== user.id) {
+  if (stock.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("Not authorized");
   }
@@ -68,15 +68,14 @@ const updateStock = asyncHandler(async (req, res) => {
     throw new Error("Stock not found");
   }
 
-  const user = await User.findById(req.user.id);
   // check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // check for logged in user matches the stock user
-  if (stock.user.toString() !== user.id) {
+  if (stock.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("Not authorized");
   }
@@ -99,15 +98,14 @@ const deleteStock = asyncHandler(async (req, res) => {
     throw new Error("Stock not found");
   }
 
-  const user = await User.findById(req.user.id);
   // check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // check for logged in user matches the stock user
-  if (stock.user.toString() !== user.id) {
+  if (stock.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("Not authorized");
   }
