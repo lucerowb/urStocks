@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom";
-import { RightSquareOutlined, UserOutlined } from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../features/auth/authSlice";
 
 function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
   return (
     <header>
       <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
@@ -13,14 +24,34 @@ function Header() {
         </Link>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <Link class="me-3 py-2 text-dark text-decoration-none" to="/login">
-            <RightSquareOutlined />
-            Login
-          </Link>
-          <Link class="me-3 py-2 text-dark text-decoration-none" to="/register">
-            <UserOutlined />
-            Register
-          </Link>
+          {user ? (
+            <>
+              <button
+                class="me-3 py-2 text-white text-decoration-none btn btn-dark"
+                onClick={onLogout}
+              >
+                <LogoutOutlined />
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                class="me-3 py-2 text-dark text-decoration-none"
+                to="/login"
+              >
+                <LoginOutlined />
+                Login
+              </Link>
+              <Link
+                class="me-3 py-2 text-dark text-decoration-none"
+                to="/register"
+              >
+                <UserOutlined />
+                Register
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </header>

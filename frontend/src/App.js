@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import PublicRoute from "./routes/PublicRoute";
 
@@ -19,6 +21,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </>
   );
 }

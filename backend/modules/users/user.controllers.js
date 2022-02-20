@@ -9,9 +9,9 @@ const { generateToken } = require("../../utility/jwt-utils");
  * @access Public
  */
 const loginUser = asyncHandler(async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.status(201).json({
@@ -21,7 +21,6 @@ const loginUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        username: user.username,
         token: generateToken(user._id),
       },
     });
@@ -36,14 +35,12 @@ const loginUser = asyncHandler(async (req, res) => {
  * @access Private
  */
 const getProfile = asyncHandler(async (req, res) => {
-  const { _id, name, email, username } = await User.findById(req.user.id);
-  res
-    .status(200)
-    .json({
-      code: 0,
-      message: "success",
-      data: { id: _id, name: name, email: email, username: username },
-    });
+  const { _id, name, email } = await User.findById(req.user.id);
+  res.status(200).json({
+    code: 0,
+    message: "success",
+    data: { id: _id, name: name, email: email },
+  });
 });
 
 // /**
@@ -62,15 +59,15 @@ const getUsers = asyncHandler(async (req, res) => {
  * @access Public
  */
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, username, password } = req.body;
+  const { name, email, password } = req.body;
 
-  if (!name || !email || !username || !password) {
+  if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please enter all fields");
   }
 
   //check if user exists
-  const userExists = await User.findOne({ email, username });
+  const userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
@@ -84,7 +81,6 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     email,
-    username,
     password: hashedPassword,
   });
 
@@ -96,7 +92,6 @@ const registerUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        username: user.username,
         token: generateToken(user._id),
       },
     });
@@ -118,7 +113,7 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 
-  const { name, email, username, password } = req.body;
+  const { name, email, password } = req.body;
 
   //hash password
   const salt = await bcrypt.genSalt(10);
@@ -129,7 +124,6 @@ const updateUser = asyncHandler(async (req, res) => {
     {
       name,
       email,
-      username,
       password: hashedPassword,
     },
     {
@@ -145,7 +139,6 @@ const updateUser = asyncHandler(async (req, res) => {
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
-        username: updatedUser.username,
         token: generateToken(updatedUser._id),
       },
     });
