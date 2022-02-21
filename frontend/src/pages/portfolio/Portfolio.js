@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { toast } from "react-toastify";
 
-import { getStocks, reset } from "../features/stocks/stockSlice";
+import { getStocks, reset } from "../../features/stocks/stockSlice";
+import { getCompanies } from "../../features/companies/companySlice";
+
 import { useEffect, useState } from "react";
 import AddStockModal from "./AddStockModal";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { capitalizeFirstLetter } from "../utility/commonUtills";
+import { capitalizeFirstLetter } from "../../utility/commonUtills";
 
 function Portfolio(props) {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ function Portfolio(props) {
   const { stocks, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.stock
   );
+  const companyState = useSelector((state) => state.company);
 
   const [addStockModalVisible, setAddStockModalVisible] = useState(false);
 
@@ -28,6 +31,13 @@ function Portfolio(props) {
     setAddStockModalVisible(true);
   };
 
+  const stockNameReplacer = (symbol) => {
+    const company = companyState?.companies?.find(
+      (com) => com?.symbol === symbol
+    );
+    if (!company) return symbol;
+    return company?.["company_name"];
+  };
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -37,6 +47,7 @@ function Portfolio(props) {
       navigate("/login");
     }
     dispatch(getStocks());
+    dispatch(getCompanies());
 
     return () => {
       dispatch(reset());
@@ -58,6 +69,9 @@ function Portfolio(props) {
           b["stock_name"]?.toString() || ""
         ),
       key: "stock_name",
+      render: (text, record, index) => {
+        return <span>{stockNameReplacer(record?.stock_name)}</span>;
+      },
     },
     {
       title: "Transaction Type",

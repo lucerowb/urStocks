@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-import { addStock } from "../features/stocks/stockSlice";
+import { addStock } from "../../features/stocks/stockSlice";
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -20,6 +20,7 @@ function AddStockModal(props) {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+  const companyState = useSelector((state) => state.company);
 
   useEffect(() => {
     if (!user) {
@@ -110,11 +111,16 @@ function AddStockModal(props) {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              <Option value="Standard Chartered Bank">
+              {companyState?.companies?.map((company, index) => (
+                <Option key={index} value={company?.symbol}>
+                  {company?.company_name?.toUpperCase()}
+                </Option>
+              ))}
+              {/* <Option value="Standard Chartered Bank">
                 Standard Chartered Bank
               </Option>
               <Option value="NIC BANK">NIC Bank</Option>
-              <Option value="Hydropower">Hydropower</Option>
+              <Option value="Hydropower">Hydropower</Option> */}
             </Select>
           </FormItem>
           <FormItem

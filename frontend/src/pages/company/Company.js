@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { toast } from "react-toastify";
 
-import { getCompanies, reset } from "../features/companies/companySlice";
+import { getCompanies, reset } from "../../features/companies/companySlice";
 import { useEffect, useState } from "react";
 import AddCompanyModal from "./AddCompanyModal";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { capitalizeFirstLetter } from "../utility/commonUtills";
+import DetailCompanyModal from "./DetailCompanyModal";
 
 function Company(props) {
   const navigate = useNavigate();
@@ -19,6 +19,9 @@ function Company(props) {
   );
 
   const [addCompanyModalVisible, setAddCompanyModalVisible] = useState(false);
+  // const [detailCompanyModalVisible, setDetailCompanyModalVisible] =
+  //   useState(false);
+  // const [editCompanyModalVisible, setEditCompanyModalVisible] = useState(false);
 
   const closeAddCompanyModal = () => {
     setAddCompanyModalVisible(false);
@@ -26,7 +29,30 @@ function Company(props) {
 
   const openAddCompanyModal = () => {
     setAddCompanyModalVisible(true);
+    // setEditCompanyModalVisible(false);
+    // setDetailCompanyModalVisible(false);
   };
+  // const closeEditCompanyModal = () => {
+  //   // fetchCurrentTabList(currentCompanyTab);
+  //   setEditCompanyModalVisible(false);
+  // };
+
+  // const openEditCompanyModal = () => {
+  //   setEditCompanyModalVisible(true);
+  //   setAddCompanyModalVisible(false);
+  //   setDetailCompanyModalVisible(false);
+  // };
+
+  // const closeDetailCompanyModal = () => {
+  //   // fetchCurrentTabList(currentCompanyTab);
+  //   setDetailCompanyModalVisible(false);
+  // };
+
+  // const openDetailCompanyModal = () => {
+  //   setDetailCompanyModalVisible(true);
+  //   setAddCompanyModalVisible(false);
+  //   setEditCompanyModalVisible(false);
+  // };
 
   useEffect(() => {
     if (isError) {
@@ -36,20 +62,12 @@ function Company(props) {
     if (!user) {
       navigate("/login");
     }
-    // dispatch(getCompanies());
-
-    // return () => {
-    //   dispatch(reset());
-    // };
-  }, [user, navigate, isError, message, dispatch]);
-
-  useEffect(() => {
     dispatch(getCompanies());
 
     return () => {
       dispatch(reset());
     };
-  }, []);
+  }, [user, navigate, isError, message, dispatch]);
 
   const columns = [
     {
@@ -173,6 +191,16 @@ function Company(props) {
           closeAddCompanyModal={closeAddCompanyModal}
         />
       )}
+
+      {/* {detailCompanyModalVisible && (
+        <DetailCompanyModal
+          {...props}
+          openEditCompanyModal={openEditCompanyModal}
+          detailCompanyModalVisible={detailCompanyModalVisible}
+          setDetailCompanyModalVisible={setDetailCompanyModalVisible}
+          closeDetailCompanyModal={closeDetailCompanyModal}
+        />
+      )} */}
     </div>
   );
 }

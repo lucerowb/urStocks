@@ -3,12 +3,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Dashboard from "./pages/Dashboard";
-import AddStock from "./pages/AddStock";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import OverLayout from "./components/OverLayout";
-import Portfolio from "./pages/Portfolio";
-import Company from "./pages/Company";
+import Portfolio from "./pages/portfolio/Portfolio";
+import Company from "./pages/company/Company";
 import NotFound from "./components/notFound";
 function App() {
   return (

@@ -1,14 +1,13 @@
-import { Form, Input, Modal, Select, Button, Spin, DatePicker } from "antd";
+import { Form, Input, Modal } from "antd";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-import { addCompany } from "../features/companies/companySlice";
+import { addCompany } from "../../features/companies/companySlice";
 
 const FormItem = Form.Item;
-const { Option } = Select;
 
 function AddCompanyModal(props) {
   const { closeAddCompanyModal, addCompanyModalVisible } = props;
