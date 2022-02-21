@@ -1,14 +1,11 @@
 import axios from "axios";
-// import { push } from 'connected-react-router';
 import { API_URL, LOGGED_IN_USER, JWT_TOKEN } from "./constants";
 
-// import { API_URL, JWT_TOKEN, USER_FULL_NAME, LOGGED_IN_USER, PERMISSION_KEY } from '../constants';
 import {
   getLocalStorage,
   setLocalStorage,
   clearLocalStorage,
 } from "./storageUtil";
-// import history from './history';
 
 export const httpBase = () => {
   const api = axios.create({
