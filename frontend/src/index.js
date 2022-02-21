@@ -8,6 +8,8 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "antd/dist/antd.min.css";
 
+import "./styles/index.css";
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

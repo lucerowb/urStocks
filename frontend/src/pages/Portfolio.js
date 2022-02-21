@@ -119,10 +119,16 @@ function Portfolio(props) {
         </Col>
         <Col xs={24}>
           <Table
+            rowKey={(record) => record?._id}
             columns={columns.filter((d) => d.isVisible !== false)}
             dataSource={stocks}
             scroll={{ x: "max-content" }}
             loading={isLoading}
+            rowClassName={(record, index) => {
+              return record?.txn_type?.toLowerCase() === "buy"
+                ? "green-background"
+                : "red-background";
+            }}
           />
         </Col>
       </Row>

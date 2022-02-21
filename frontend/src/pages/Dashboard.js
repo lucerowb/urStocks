@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -12,6 +13,32 @@ function Dashboard() {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  // const [nepseData, setNepseData] = useState([]);
+  // console.log(
+  //   `file: Dashboard.js ~ line 17 ~ Dashboard ~ nepseData`,
+  //   nepseData
+  // );
+  // useEffect(() => {
+  //   axios
+  //     .get("https://nepse-data-api.herokuapp.com/data/todaysprice", {
+  //       headers: {
+  //         // "user-agent": "Thunder Client (https://www.thunderclient.com)",
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(`file: Dashboard.js ~ line 26 ~ .then ~ res`, res);
+
+  //       setNepseData(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(
+  //         `file: Dashboard.js ~ line 30 ~ .then ~ error`,
+  //         error.response
+  //       );
+  //     });
+  // }, []);
 
   return (
     <>
