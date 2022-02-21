@@ -16,7 +16,7 @@ function MenuRoute() {
       <Menu.Item key="3" icon={<UploadOutlined />}>
         <Link to="/portfolio">Portfolio</Link>
       </Menu.Item>
-      <Menu.Item key="3" icon={<CopyrightOutlined />}>
+      <Menu.Item key="4" icon={<CopyrightOutlined />}>
         <Link to="/company">Company</Link>
       </Menu.Item>
     </Menu>

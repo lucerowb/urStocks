@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import OverLayout from "./components/OverLayout";
 import Portfolio from "./pages/Portfolio";
 import Company from "./pages/Company";
+import NotFound from "./components/notFound";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/company" element={<Company />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </OverLayout>
       </Router>
