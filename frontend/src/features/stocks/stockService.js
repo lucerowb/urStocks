@@ -1,26 +1,14 @@
-import axios from "axios";
-
-const API_URL = process.env.API_URL || "http://localhost:8080";
+import { fetch, store } from "../../utility/httpUtil";
 
 // add stock
-const addStock = async (formData, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.post(API_URL + "/api/stocks/", formData, config);
+const addStock = async (formData) => {
+  const response = await store("api/stocks", formData);
   return response.data.data;
 };
 
 // get all stocks
-const getStocks = async (token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.get(API_URL + "/api/stocks/", config);
+const getStocks = async () => {
+  const response = await fetch("api/stocks");
   return response.data.data;
 };
 

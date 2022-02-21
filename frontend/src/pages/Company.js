@@ -36,12 +36,20 @@ function Company(props) {
     if (!user) {
       navigate("/login");
     }
+    // dispatch(getCompanies());
+
+    // return () => {
+    //   dispatch(reset());
+    // };
+  }, [user, navigate, isError, message, dispatch]);
+
+  useEffect(() => {
     dispatch(getCompanies());
 
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, isError, message, dispatch]);
+  }, []);
 
   const columns = [
     {

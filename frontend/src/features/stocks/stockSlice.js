@@ -14,8 +14,8 @@ export const addStock = createAsyncThunk(
   "stock/add",
   async (formData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await stockService.addStock(formData, token);
+      // const token = thunkAPI.getState().auth.user.token;
+      return await stockService.addStock(formData);
     } catch (error) {
       const message =
         (error.response &&
@@ -32,8 +32,8 @@ export const getStocks = createAsyncThunk(
   "stock/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await stockService.getStocks(token);
+      // const token = thunkAPI.getState().auth.user.token;
+      return await stockService.getStocks();
     } catch (error) {
       const message =
         (error.response &&

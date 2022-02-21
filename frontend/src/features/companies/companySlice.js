@@ -14,8 +14,8 @@ export const addCompany = createAsyncThunk(
   "company/add",
   async (formData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await companyService.addCompany(formData, token);
+      // const token = thunkAPI.getState().auth.user.token;
+      return await companyService.addCompany(formData);
     } catch (error) {
       const message =
         (error.response &&
@@ -32,8 +32,8 @@ export const getCompanies = createAsyncThunk(
   "company/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await companyService.getCompanies(token);
+      // const token = thunkAPI.getState().auth.user.token;
+      return await companyService.getCompanies();
     } catch (error) {
       const message =
         (error.response &&

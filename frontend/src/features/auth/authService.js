@@ -1,28 +1,31 @@
-import axios from "axios";
-
-const API_URL = process.env.API_URL || "http://localhost:8080";
+import { LOGGED_IN_USER, JWT_TOKEN } from "../../utility/constants";
+import { store } from "../../utility/httpUtil";
+import { setLocalStorage, clearLocalStorage } from "../../utility/storageUtil";
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL + "/api/users/", userData);
+  const response = await store("api/users", userData);
   if (response.data.code == 0) {
-    localStorage.setItem("urstocks-user", JSON.stringify(response.data.data));
+    setLocalStorage(LOGGED_IN_USER, response.data.data);
+    setLocalStorage(JWT_TOKEN, response?.data?.data?.token);
   }
   return response.data.data;
 };
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.post(API_URL + "/api/users/login", userData);
+  const response = await store("api/users/login", userData);
   if (response.data.code == 0) {
-    localStorage.setItem("urstocks-user", JSON.stringify(response.data.data));
+    setLocalStorage(LOGGED_IN_USER, response.data.data);
+    setLocalStorage(JWT_TOKEN, response?.data?.data?.token);
   }
   return response.data.data;
 };
 
 //Logout user
 const logout = async () => {
-  localStorage.removeItem("urstocks-user");
+  clearLocalStorage(LOGGED_IN_USER);
+  clearLocalStorage(JWT_TOKEN);
 };
 
 const authService = {
