@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-import { addStock } from "../features/stocks/stockSlice";
+import { addCompany } from "../features/companies/companySlice";
 
 const FormItem = Form.Item;
 const { Option } = Select;
 
-function AddStockModal(props) {
-  const { closeAddStockModal, addStockModalVisible } = props;
+function AddCompanyModal(props) {
+  const { closeAddCompanyModal, addCompanyModalVisible } = props;
   const [form] = Form.useForm();
 
   const navigate = useNavigate();
@@ -30,18 +30,14 @@ function AddStockModal(props) {
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const disabledDate = (current) => {
-    return current && current > moment().endOf("day");
-  };
-
   const onFinish = (values) => {
-    console.log("addStock", values);
+    console.log("addCompany", values);
     const userData = {
       ...values,
     };
-    dispatch(addStock(userData));
+    dispatch(addCompany(userData));
     form.resetFields();
-    closeAddStockModal();
+    closeAddCompanyModal();
   };
 
   const formItemLayout = {
@@ -64,13 +60,13 @@ function AddStockModal(props) {
   return (
     <>
       <Modal
-        visible={addStockModalVisible}
-        title="Add Stock"
+        visible={addCompanyModalVisible}
+        title="Add Company"
         okText="Save"
         cancelText="Cancel"
         destroyOnClose
         onCancel={() => {
-          closeAddStockModal();
+          closeAddCompanyModal();
           form.resetFields();
         }}
         width="600px"
@@ -93,95 +89,66 @@ function AddStockModal(props) {
           className="login-form"
         >
           <FormItem
-            label="Stock Name"
-            name="stock_name"
+            label="Company Name"
+            name="company_name"
             rules={[
               {
                 required: true,
-                message: "Please select stock name",
+                message: "Please select company name",
               },
             ]}
           >
-            <Select
-              showSearch
-              placeholder="Stock Name"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="Standard Chartered Bank">
-                Standard Chartered Bank
-              </Option>
-              <Option value="NIC BANK">NIC Bank</Option>
-              <Option value="Hydropower">Hydropower</Option>
-            </Select>
+            <Input placeholder="Company Name" autoComplete="off" />
           </FormItem>
           <FormItem
-            label="Transaction Type"
-            name="txn_type"
+            label="Symbol"
+            name="symbol"
             rules={[
               { required: true, message: "Please select transaction type" },
             ]}
           >
-            <Select
-              showSearch
-              placeholder="Transaction Type"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="buy">Buy</Option>
-              <Option value="sell">Sell</Option>
-            </Select>
+            <Input placeholder="Symbol" autoComplete="off" />
           </FormItem>
           <FormItem
-            label="Quantity"
-            name="quantity"
+            label="Available Quantity"
+            name="available_quantity"
             rules={[
-              { required: true, message: "Please enter quantity" },
+              { required: true, message: "Please enter available quantity" },
               { pattern: "^[0-9]+$", message: "Invalid character" },
             ]}
           >
-            <Input placeholder="Quantity" autoComplete="off" />
+            <Input placeholder="Available Quantity" autoComplete="off" />
           </FormItem>
           <FormItem
-            label="Amount (per Unit)"
-            name="amount"
+            label="Previous Amount (per Unit)"
+            name="prev_amount"
             rules={[
-              { required: true, message: "Please enter amount" },
+              { required: true, message: "Please enter previous amount" },
               { pattern: "^[0-9.]+$", message: "Invalid character" },
             ]}
           >
-            <Input placeholder="Amount  (per Unit)" autoComplete="off" />
-          </FormItem>
-          <FormItem
-            label="Transaction Date"
-            name="txn_date"
-            rules={[
-              { required: true, message: "Please select transaction date" },
-            ]}
-          >
-            <DatePicker
-              placeholder="Transaction Date"
-              disabledDate={disabledDate}
-              style={{ width: "100%" }}
+            <Input
+              placeholder="Previous Amount  (per Unit)"
+              autoComplete="off"
             />
           </FormItem>
-          {/* <FormItem>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              Add
-            </Button>
-          </FormItem> */}
+          <FormItem
+            label="Current Amount (per Unit)"
+            name="current_amount"
+            rules={[
+              { required: true, message: "Please enter current amount" },
+              { pattern: "^[0-9.]+$", message: "Invalid character" },
+            ]}
+          >
+            <Input
+              placeholder="Current Amount  (per Unit)"
+              autoComplete="off"
+            />
+          </FormItem>
         </Form>
       </Modal>
     </>
   );
 }
 
-export default AddStockModal;
+export default AddCompanyModal;

@@ -8,6 +8,7 @@ import { getStocks, reset } from "../features/stocks/stockSlice";
 import { useEffect, useState } from "react";
 import AddStockModal from "./AddStockModal";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import { capitalizeFirstLetter } from "../utility/commonUtills";
 
 function Portfolio(props) {
   const navigate = useNavigate();
@@ -66,9 +67,12 @@ function Portfolio(props) {
           b["txn_type"]?.toString() || ""
         ),
       key: "txn_type",
+      render: (text, record) => {
+        return <span>{capitalizeFirstLetter(record?.txn_type)}</span>;
+      },
     },
     {
-      title: "Quantity",
+      title: "Quantity (Units)",
       dataIndex: "quantity",
       sorter: (a, b) =>
         (a["quantity"]?.toString() || "").localeCompare(
@@ -77,7 +81,7 @@ function Portfolio(props) {
       key: "quantity",
     },
     {
-      title: "Amount",
+      title: "Amount (Rs.)",
       dataIndex: "amount",
       sorter: (a, b) =>
         (a["amount"]?.toString() || "").localeCompare(
@@ -126,8 +130,8 @@ function Portfolio(props) {
             loading={isLoading}
             rowClassName={(record, index) => {
               return record?.txn_type?.toLowerCase() === "buy"
-                ? "green-background"
-                : "red-background";
+                ? "buy-background"
+                : "sell-background";
             }}
           />
         </Col>

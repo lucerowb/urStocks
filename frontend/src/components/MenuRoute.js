@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  CopyrightOutlined,
 } from "@ant-design/icons";
 
 function MenuRoute() {
@@ -13,11 +13,11 @@ function MenuRoute() {
       <Menu.Item key="1" icon={<UserOutlined />}>
         <Link to="/">Dashboard</Link>
       </Menu.Item>
-      {/* <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-        <Link to="/add-stock">Add Stock</Link>
-      </Menu.Item> */}
       <Menu.Item key="3" icon={<UploadOutlined />}>
         <Link to="/portfolio">Portfolio</Link>
+      </Menu.Item>
+      <Menu.Item key="3" icon={<CopyrightOutlined />}>
+        <Link to="/company">Company</Link>
       </Menu.Item>
     </Menu>
   );

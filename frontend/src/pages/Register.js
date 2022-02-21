@@ -53,15 +53,16 @@ function Register() {
               <UserOutlined />
               Register
             </h1>
-            <p>please create an account</p>
+            <p>Please create an account</p>
           </section>
           <section className="form">
             <Form onFinish={onFinish} className="login-form">
               <FormItem
+                // label="Full Name"
                 name="name"
                 rules={[{ required: true, message: "Please input your name" }]}
               >
-                <Input size="large" placeholder="name" />
+                <Input size="large" placeholder="Full Name" />
               </FormItem>
               <FormItem
                 name="email"

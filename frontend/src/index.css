@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.buy-background {
+  background-color: rgb(143, 219, 143);
+}
+
+.sell-background {
+  background-color: rgb(214, 146, 146);
+}
