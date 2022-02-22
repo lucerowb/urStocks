@@ -9,7 +9,7 @@ import {
 
 export const httpBase = () => {
   const api = axios.create({
-    baseURL: `${API_URL}`,
+    // baseURL: `${API_URL}`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
